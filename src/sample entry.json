@@ -1,0 +1,14 @@
+{
+    
+    "name":"Static Orb",
+    "scryfall_uri":"https://scryfall.com/card/7ed/319/static-orb?utm_source=api",
+    "image":"https://cards.scryfall.io/small/front/8/6/86bf43b1-8d4e-4759-bb2d-0b2e03ba7012.jpg?1562242171",
+    "mana_cost":"{3}",
+    "cmc":3.0,
+    "type":"Artifact",
+    "oracle_text":"As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.",
+    "colors":[],
+    "color_identity":[],
+    "keywords":[],
+    "legalities":{"standard":"not_legal","future":"not_legal","historic":"not_legal","gladiator":"not_legal","pioneer":"not_legal","explorer":"not_legal","modern":"not_legal","legacy":"legal","pauper":"not_legal","vintage":"legal","penny":"not_legal","commander":"legal","oathbreaker":"legal","brawl":"not_legal","historicbrawl":"not_legal","alchemy":"not_legal","paupercommander":"not_legal","duel":"legal","oldschool":"not_legal","premodern":"legal","predh":"legal"},
+}
