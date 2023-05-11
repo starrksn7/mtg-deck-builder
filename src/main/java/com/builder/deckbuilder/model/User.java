@@ -5,25 +5,25 @@ import java.util.Objects;
 import java.util.Set;
 public class User {
 
-    private int id;
+    private int userId;
     private String username;
     private String password;
     private Set<Authority> authorities = new HashSet<>();
 
     public User() {}
 
-    public User(int id, String username, String password, String authorities) {
-        this.id = id;
+    public User(int userId, String username, String password, String authorities) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -62,7 +62,7 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id &&
+        return userId == user.userId &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(authorities, user.authorities);
@@ -70,13 +70,13 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, authorities);
+        return Objects.hash(userId, username, password, authorities);
     }
 
     @Override
     public String toString(){
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", authorities=" + authorities + "}";
     }

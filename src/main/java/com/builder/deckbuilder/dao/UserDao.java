@@ -1,10 +1,12 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.User;
-
+import java.util.List;
 public interface UserDao {
 
-    User findByUsername(String username);
+    int findIdByUsername(String username);
 
-    boolean create(String username, String password);
+    boolean createUser(String username, String password);
+
+    List<User> listAllUsers();
 }

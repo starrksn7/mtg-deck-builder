@@ -1,11 +1,16 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Deck;
+import java.util.List;
+
 public interface DeckDao {
 
-    Deck findDeckByUserId(int userId);
+    List<Deck> findDecksByUserId(int userId);
 
     Deck findDeckByDeckId(int deckId);
 
-    Deck findDeckByUsername(String username);
+    List<Deck> findDecksByUsername(String username);
+
+    Deck createDeck(int userId);
+
 }
