@@ -1,40 +1,40 @@
-DROP TABLE IF EXISTS user, deck, cards;
+DROP TABLE IF EXISTS users, decks, cards;
 
 DROP SEQUENCE IF EXISTS user_id, deck_id, card_id;
 
-CREATE SEQUENCE user_id
+CREATE SEQUENCE seq_user_id
 	INCREMENT BY 1
 	START WITH 1
-	NO MAXVALUE
+	NO MAXVALUE;
 
-CREATE SEQUENCE deck_id
+CREATE SEQUENCE seq_deck_id
 	INCREMENT BY 1
 	START WITH 1
-	NO MAXVALUE
+	NO MAXVALUE;
 	
-CREATE SEQUENCE card_id
+CREATE SEQUENCE seq_card_id
 	INCREMENT BY 1
 	START WITH 1
-	NO MAXVALUE
+	NO MAXVALUE;
 	
-CREATE TABLE user (
+CREATE TABLE users (
 	user_id int NOT NULL DEFAULT nextval('seq_user_id'),
 	username varchar(50) NOT NULL,
-	password_hash varcar(200) NOT NULL,
+	password_hash varchar(200) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id),
 	CONSTRAINT UQ_username UNIQUE (username)
 );
 
-CREATE TABLE deck (
+CREATE TABLE decks (
 	deck_id int NOT NULL DEFAULT nextval('seq_deck_id'),
 	user_id int NOT NULL,
-	card_id int NOT NULL,
-	CONSTRAINT PK_deck PRIMARY KEY (deck_id),
-	CONSTRAINT FK_deck_user FOREIGN KEY (user_id) REFERENCES user (user_id)
+	CONSTRAINT PK_decks PRIMARY KEY (deck_id),
+	CONSTRAINT FK_decks_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE cards (
 	card_id int NOT NULL DEFAULT nextval('seq_card_id'),
+	deck_id int,
 	card_name varchar(50) NOT NULL,
 	scryfall_link varchar(100) NOT NULL,
 	image_link varchar(100) NOT NULL,
@@ -42,6 +42,10 @@ CREATE TABLE cards (
 	cmc decimal(10, 1),
 	card_type varchar(30),
 	oracle_text varchar(200),
-	CONSTRAINT PK_cards PRIMARY KEY (card_id) REFERENCES deck (card_id)
-	CONSTRAINT FK_cards_deck FOREIGN KEY (card_id) 
+	colors varchar(15),
+	color_identity varchar(15),
+	keywords varchar(100),
+	legal boolean DEFAULT null,
+	CONSTRAINT PK_cards PRIMARY KEY (card_id),
+	CONSTRAINT FK_cards_decks FOREIGN KEY (deck_id) REFERENCES decks (deck_id)
 );
