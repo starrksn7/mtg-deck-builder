@@ -28,6 +28,7 @@ CREATE TABLE users (
 CREATE TABLE decks (
 	deck_id int NOT NULL DEFAULT nextval('seq_deck_id'),
 	user_id int NOT NULL,
+	commander varchar(50) NOT NULL,
 	CONSTRAINT PK_decks PRIMARY KEY (deck_id),
 	CONSTRAINT FK_decks_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
