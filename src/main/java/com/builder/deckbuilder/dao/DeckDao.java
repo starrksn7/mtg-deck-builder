@@ -10,7 +10,7 @@ public interface DeckDao {
 
     List<Deck> findDecksByUserId(int userId);
 
-    Deck findDecksByDeckId(int deckId);
+    Deck findDeckByDeckId(int deckId);
 
     List<Deck> findDecksByUsername(String username);
 
