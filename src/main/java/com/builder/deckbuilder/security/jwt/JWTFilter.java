@@ -4,19 +4,19 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
+import org.springframework.security.core.Authentication;
 
 import java.io.IOException;
 
 public class JWTFilter extends GenericFilterBean {
     private static final Logger LOG = LoggerFactory.getLogger(JWTFilter.class);
-    public static final String Authorization_HEADER = "Authorization";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
     private TokenProvider tokenProvider;
 
     public JWTFilter(TokenProvider tokenProvider){

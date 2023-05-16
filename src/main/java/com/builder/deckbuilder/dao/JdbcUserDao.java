@@ -2,6 +2,7 @@ package com.builder.deckbuilder.dao;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -40,6 +41,16 @@ public class JdbcUserDao implements UserDao{
             return false;
         }
         return true;
+    }
+
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        String sql = "SELECT user_id, username FROM users WHERE username ILIKE ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+
+        if(results.next()){
+            return mapRowToUser(results);
+        }
+        throw new UsernameNotFoundException("User " + username + " was not found");
     }
 
     public List<User> listAllUsers(){

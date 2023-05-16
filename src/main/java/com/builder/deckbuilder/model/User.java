@@ -8,6 +8,7 @@ public class User {
     private int userId;
     private String username;
     private String password;
+    private boolean activated;
     private Set<Authority> authorities = new HashSet<>();
 
     public User() {}
@@ -16,6 +17,7 @@ public class User {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.activated = true;
     }
 
     public int getUserId() {
@@ -42,6 +44,14 @@ public class User {
         this.password = password;
     }
 
+    public boolean isActivated(){
+        return activated;
+    }
+
+    public void setActivated(boolean activated){
+        this.activated = activated;
+    }
+
     public Set<Authority> getAuthorities() {
         return authorities;
     }
@@ -63,6 +73,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return userId == user.userId &&
+                activated == user.activated &&
                 Objects.equals(username, user.username) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(authorities, user.authorities);
@@ -70,7 +81,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, username, password, authorities);
+        return Objects.hash(userId, username, password, activated, authorities);
     }
 
     @Override
@@ -78,6 +89,7 @@ public class User {
         return "User{" +
                 "userId=" + userId +
                 ", username='" + username + '\'' +
+                ", activated= " + activated +
                 ", authorities=" + authorities + "}";
     }
 }

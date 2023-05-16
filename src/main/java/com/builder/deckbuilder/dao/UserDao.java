@@ -8,5 +8,7 @@ public interface UserDao {
 
     boolean createUser(String username, String password);
 
+    User findByUsername(String username);
+
     List<User> listAllUsers();
 }
