@@ -6,7 +6,7 @@ public interface UserDao {
 
     int findIdByUsername(String username);
 
-    boolean createUser(String username, String password);
+    int createUser(String username, String password);
 
     User findByUsername(String username);
 

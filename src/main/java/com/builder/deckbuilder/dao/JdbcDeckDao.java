@@ -1,5 +1,6 @@
 package com.builder.deckbuilder.dao;
 
+import com.builder.deckbuilder.model.Card;
 import com.builder.deckbuilder.model.Deck;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,10 +12,12 @@ import java.util.List;
 @Component
 public class JdbcDeckDao implements DeckDao {
 
-    private final DeckDao deckDao;
+    private DeckDao deckDao;
+
+    private CardDao cardDao;
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcDeckDao(DeckDao deckDao, JdbcTemplate jdbcTemplate){
+    public JdbcDeckDao(DeckDao deckDao, CardDao cardDao, JdbcTemplate jdbcTemplate){
         this.deckDao = deckDao;
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -87,6 +90,20 @@ public class JdbcDeckDao implements DeckDao {
         return decks;
     }
 
+    public List<Card> listCardsByDeckId(int deckId){
+        String sql = "SELECT * FROM cards WHERE deck_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, deckId);
+
+        List<Card> deck = new ArrayList<>();
+
+        while(results.next()){
+            Card card = new Card();
+            mapRowToCard(results);
+            deck.add(card);
+        }
+        return deck;
+    }
+
     private Deck mapRowToDeck(SqlRowSet rowSet){
         Deck deck  = new Deck();
         deck.setDeckId(rowSet.getInt("deck_id"));
@@ -94,4 +111,20 @@ public class JdbcDeckDao implements DeckDao {
         return deck;
     }
 
+    private Card mapRowToCard(SqlRowSet rowSet){
+        Card card = new Card();
+        card.setCardId(rowSet.getInt("card_id"));
+        card.setCardName(rowSet.getString("card_name"));
+        card.setScryfallLink(rowSet.getString("scryfall_link"));
+        card.setImageLink(rowSet.getString("image_link"));
+        card.setManaCost(rowSet.getString("mana_cost"));
+        card.setCmc(rowSet.getString("cmc"));
+        card.setCardType(rowSet.getString("card_type"));
+        card.setOracleText(rowSet.getString("oracle_text"));
+        card.setColors(rowSet.getString("colors"));
+        card.setColorIdentity(rowSet.getString("color_identity"));
+        card.setKeywords(rowSet.getString("keywords"));
+        card.setLegal(rowSet.getBoolean("legal"));
+        return card;
+    }
 }

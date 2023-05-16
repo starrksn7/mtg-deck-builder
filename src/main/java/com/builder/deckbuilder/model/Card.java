@@ -3,7 +3,6 @@ package com.builder.deckbuilder.model;
 public class Card {
 
     private int cardId;
-    private int deckId;
     private String cardName;
     private String scryfallLink;
     private String imageLink;
@@ -18,9 +17,9 @@ public class Card {
 
     public Card(){};
 
-    public Card(int cardId, int deckId, String cardName, String scryfallLink, String imageLink, String manaCost, String cmc, String cardType, String oracleText, String colors, String colorIdentity, String keywords, boolean legal){
+    public Card(int cardId, String cardName, String scryfallLink, String imageLink, String manaCost, String cmc, String cardType,
+                String oracleText, String colors, String colorIdentity, String keywords, boolean legal){
         this.cardId = cardId;
-        this.deckId = deckId;
         this.cardName = cardName;
         this.scryfallLink = scryfallLink;
         this.imageLink = imageLink;
@@ -40,14 +39,6 @@ public class Card {
 
     public void setCardId(int cardId) {
         this.cardId = cardId;
-    }
-
-    public int getDeckId() {
-        return deckId;
-    }
-
-    public void setDeckId(int deckId) {
-        this.deckId = deckId;
     }
 
     public String getCardName() {

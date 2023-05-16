@@ -11,6 +11,7 @@ public class Deck {
     public Deck(int deckId, int userId, String commander){
         this.deckId = deckId;
         this.userId = userId;
+        this.commander = commander;
     }
 
     public int getDeckId() {

@@ -1,5 +1,6 @@
 package com.builder.deckbuilder.dao;
 
+import com.builder.deckbuilder.model.Card;
 import com.builder.deckbuilder.model.Deck;
 
 
@@ -17,5 +18,7 @@ public interface DeckDao {
     int createDeck(int userId, String commander);
 
     List<Deck> getDecksByCommander(String commander);
+
+    List<Card> listCardsByDeckId(int deckId);
 
 }

@@ -3,14 +3,20 @@ import com.builder.deckbuilder.model.Card;
 import java.util.List;
 public interface CardDao {
 
-    List<Card> listCardsByDeckId(int deckId);
 
     List<Card> listAllCards();
 
-    List<Card> getByFunction(String oracleText);
+    List<Card> listCardsByColorIdentity(String colorIdentity);
 
-    Card addCardToDeck(int deckId);
+    Card findCardByName(String cardName);
 
-    Card populateDatabase();
+    List<Card> advancedCardSearch(String cardName, String manaCost, String cmc, String cardType, String oracleText, String colors,
+                          String colorIdentity, String keywords, String legal);
+
+    List<Card> getCardsByKeyword(String keyword);
+
+    boolean addCardToDeck(int cardId, int deckId);
+
+    boolean populateDatabase();
 
 }

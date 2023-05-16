@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class JdbcUserDao implements UserDao{
 
-    private final UserDao userDao;
+    private UserDao userDao;
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcUserDao(UserDao userDao, JdbcTemplate jdbcTemplate){
@@ -30,7 +30,7 @@ public class JdbcUserDao implements UserDao{
         return id == null ? -1 : id;
     }
 
-    public boolean createUser(String username, String password){
+    public int createUser(String username, String password){
         String sql =  "INSERT INTO users (username, password_hash) VALUES (?, ?) RETURNING user_id;";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         Integer newUserId;
@@ -38,9 +38,9 @@ public class JdbcUserDao implements UserDao{
             newUserId = jdbcTemplate.queryForObject(sql, Integer.class, username, password_hash);
         } catch (DataAccessException e) {
             System.out.println(e.getLocalizedMessage());
-            return false;
+            return -1;
         }
-        return true;
+        return newUserId;
     }
 
     public User findByUsername(String username) throws UsernameNotFoundException {
