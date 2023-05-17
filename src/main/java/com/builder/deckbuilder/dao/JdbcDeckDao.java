@@ -91,14 +91,13 @@ public class JdbcDeckDao implements DeckDao {
     }
 
     public List<Card> listCardsByDeckId(int deckId){
-        String sql = "SELECT * FROM cards WHERE deck_id = ?;";
+        String sql = "SELECT * FROM cards JOIN deck_cards ON deck_cards.card_id = cards.card_id WHERE deck_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, deckId);
 
         List<Card> deck = new ArrayList<>();
 
         while(results.next()){
-            Card card = new Card();
-            mapRowToCard(results);
+            Card card = mapRowToCard(results);
             deck.add(card);
         }
         return deck;

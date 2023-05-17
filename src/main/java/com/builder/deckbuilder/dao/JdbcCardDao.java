@@ -1,13 +1,18 @@
 package com.builder.deckbuilder.dao;
 
+import com.builder.deckbuilder.model.Card;
+import com.fasterxml.jackson.core.JsonParser;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-import com.builder.deckbuilder.model.Card;
 
+import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class JdbcCardDao implements CardDao{
@@ -27,8 +32,7 @@ public class JdbcCardDao implements CardDao{
         List<Card> cards = new ArrayList<>();
 
         while(results.next()){
-            Card card = new Card();
-            mapRowToCard(results);
+            Card card = mapRowToCard(results);
             cards.add(card);
         }
         return cards;
@@ -41,8 +45,20 @@ public class JdbcCardDao implements CardDao{
         List<Card> cards = new ArrayList<>();
 
         while(results.next()){
-            Card card = new Card();
-            mapRowToCard(results);
+            Card card = mapRowToCard(results);
+            cards.add(card);
+        }
+        return cards;
+    }
+
+    public List<Card> findCardByName(String name){
+        String sql = "SELECT * FROM cards WHERE card_name ILIKE ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
+
+        List<Card> cards = new ArrayList<>();
+
+        while(results.next()){
+            Card card = mapRowToCard(results);
             cards.add(card);
         }
         return cards;
@@ -59,8 +75,7 @@ public class JdbcCardDao implements CardDao{
         List<Card> cards = new ArrayList<>();
 
         while(results.next()){
-            Card card = new Card();
-            mapRowToCard(results);
+            Card card = mapRowToCard(results);
             cards.add(card);
         }
         return cards;
@@ -73,8 +88,7 @@ public class JdbcCardDao implements CardDao{
         List<Card> cards = new ArrayList<>();
 
         while(results.next()){
-            Card card = new Card();
-            mapRowToCard(results);
+            Card card = mapRowToCard(results);
             cards.add(card);
         }
         return cards;
@@ -89,11 +103,26 @@ public class JdbcCardDao implements CardDao{
             System.out.println("Either the deck_id or the card_id does not exist");
         }
         return false;
-
     }
 
-    public boolean populateDatabase(){
-        
+    public String populateDatabase(){
+
+
+        try (Scanner scanner = new Scanner("E:/card-list.json")){
+            while(scanner.hasNextLine()){
+                String cardData = scanner.nextLine();
+
+
+            }
+
+
+
+            String sql = "INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+        } catch (FileNotFoundException e){
+
+        }
+        return "Cards added to databse";
     }
 
     private Card mapRowToCard(SqlRowSet rowSet){
