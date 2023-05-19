@@ -8,7 +8,7 @@ public interface CardDao {
 
     List<Card> listCardsByColorIdentity(String colorIdentity);
 
-    Card findCardByName(String cardName);
+    List<Card> findCardByName(String cardName);
 
     List<Card> advancedCardSearch(String cardName, String manaCost, String cmc, String cardType, String oracleText, String colors,
                           String colorIdentity, String keywords, String legal);
@@ -17,6 +17,6 @@ public interface CardDao {
 
     boolean addCardToDeck(int cardId, int deckId);
 
-    boolean populateDatabase();
+    String populateDatabase();
 
 }
