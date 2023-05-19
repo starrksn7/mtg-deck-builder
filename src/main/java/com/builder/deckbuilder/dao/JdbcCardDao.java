@@ -93,7 +93,7 @@ public class JdbcCardDao implements CardDao{
     }
 
     public boolean populateDatabase(){
-        
+
     }
 
     private Card mapRowToCard(SqlRowSet rowSet){
