@@ -3,12 +3,16 @@ package com.builder.deckbuilder.dao;
 import com.builder.deckbuilder.model.Card;
 import com.fasterxml.jackson.core.JsonParser;
 import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,24 +110,23 @@ public class JdbcCardDao implements CardDao{
     }
 
 
-    public String populateDatabase(){
+    public String populateDatabase() throws FileNotFoundException {
+
+        FileReader reader = new FileReader("E:/card-list.json");
+
+        
+        JSONParser parser =  new JSONParser();
+        JSONArray array = (JSONArray) parser.parse();
 
 
-        try (Scanner scanner = new Scanner("E:/card-list.json")){
-            while(scanner.hasNextLine()){
-                String cardData = scanner.nextLine();
-
-
-            }
 
 
 
-            String sql = "INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        } catch (FileNotFoundException e){
+        String sql = "INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-        }
-        return "Cards added to databse";
+
+        return "Cards added to database";
 
     }
 
