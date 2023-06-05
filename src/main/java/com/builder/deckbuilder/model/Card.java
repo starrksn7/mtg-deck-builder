@@ -7,18 +7,18 @@ public class Card {
     private String scryfallLink;
     private String imageLink;
     private String manaCost;
-    private String cmc;
+    private Double cmc;
     private String cardType;
     private String oracleText;
     private String colors;
     private String colorIdentity;
     private String keywords;
-    private boolean legal;
+
 
     public Card(){};
 
-    public Card(int cardId, String cardName, String scryfallLink, String imageLink, String manaCost, String cmc, String cardType,
-                String oracleText, String colors, String colorIdentity, String keywords, boolean legal){
+    public Card(int cardId, String cardName, String scryfallLink, String imageLink, String manaCost, Double cmc, String cardType,
+                String oracleText, String colors, String colorIdentity, String keywords){
         this.cardId = cardId;
         this.cardName = cardName;
         this.scryfallLink = scryfallLink;
@@ -30,7 +30,6 @@ public class Card {
         this.colors = colors;
         this.colorIdentity = colorIdentity;
         this.keywords = keywords;
-        this.legal = legal;
     }
 
     public int getCardId() {
@@ -73,11 +72,11 @@ public class Card {
         this.manaCost = manaCost;
     }
 
-    public String getCmc() {
+    public Double getCmc() {
         return cmc;
     }
 
-    public void setCmc(String cmc) {
+    public void setCmc(Double cmc) {
         this.cmc = cmc;
     }
 
@@ -119,13 +118,5 @@ public class Card {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public boolean isLegal() {
-        return legal;
-    }
-
-    public void setLegal(boolean legal) {
-        this.legal = legal;
     }
 }

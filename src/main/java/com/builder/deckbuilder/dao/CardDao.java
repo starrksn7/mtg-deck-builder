@@ -1,7 +1,7 @@
 package com.builder.deckbuilder.dao;
+
 import com.builder.deckbuilder.model.Card;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 public interface CardDao {
 
@@ -19,6 +19,6 @@ public interface CardDao {
 
     boolean addCardToDeck(int cardId, int deckId);
 
-    String populateDatabase() throws FileNotFoundException;
+    String populateDatabase();
 
 }

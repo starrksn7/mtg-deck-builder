@@ -117,13 +117,12 @@ public class JdbcDeckDao implements DeckDao {
         card.setScryfallLink(rowSet.getString("scryfall_link"));
         card.setImageLink(rowSet.getString("image_link"));
         card.setManaCost(rowSet.getString("mana_cost"));
-        card.setCmc(rowSet.getString("cmc"));
+        card.setCmc(rowSet.getDouble("cmc"));
         card.setCardType(rowSet.getString("card_type"));
         card.setOracleText(rowSet.getString("oracle_text"));
         card.setColors(rowSet.getString("colors"));
         card.setColorIdentity(rowSet.getString("color_identity"));
         card.setKeywords(rowSet.getString("keywords"));
-        card.setLegal(rowSet.getBoolean("legal"));
         return card;
     }
 }

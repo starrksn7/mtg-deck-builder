@@ -1,22 +1,20 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
-import com.fasterxml.jackson.core.JsonParser;
-import org.apache.tomcat.util.json.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.StringReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Component
 public class JdbcCardDao implements CardDao{
@@ -110,21 +108,39 @@ public class JdbcCardDao implements CardDao{
     }
 
 
-    public String populateDatabase() throws FileNotFoundException {
+    public String populateDatabase() {
+        JSONParser jsonParser = new JSONParser();
 
-        FileReader reader = new FileReader("E:/card-list.json");
+        try{
+            Object object = jsonParser.parse(new FileReader("E:/card-list.json"));
 
-        
-        JSONParser parser =  new JSONParser();
-        JSONArray array = (JSONArray) parser.parse();
+            JSONArray jsonObjects = (JSONArray) object;
 
+            for(Object entry : jsonObjects){
+                JSONObject jsonObject = (JSONObject) entry;
+                String name = (String) jsonObject.get("name");
+                String scryfallLink = (String) jsonObject.get("scryfall_uri");
+                String imageLink = (String) jsonObject.get("image");
+                String manaCost = (String) jsonObject.get("mana_cost");
+                Double cmc = (Double) jsonObject.get("cmc");
+                String cardType = (String) jsonObject.get("type");
+                String oracleText = (String) jsonObject.get("oracle_text");
+                String colors = (String) jsonObject.get("colors");
+                String colorIdentity = (String) jsonObject.get("color_identity");
+                String keywords = (String) jsonObject.get("keywords");
 
+                String sql = "INSERT INTO cards (card_name, scryfall_link, image_link, mana_cost, " +
+                        "cmc, card_type, oracle_text, colors, color_identity, keywords) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-
-
-
-        String sql = "INSERT INTO cards VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-
+                jdbcTemplate.update(sql, name, scryfallLink, imageLink, manaCost, cmc, cardType, oracleText, colors, colorIdentity, keywords);
+            }
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
 
         return "Cards added to database";
 
@@ -137,13 +153,12 @@ public class JdbcCardDao implements CardDao{
         card.setScryfallLink(rowSet.getString("scryfall_link"));
         card.setImageLink(rowSet.getString("image_link"));
         card.setManaCost(rowSet.getString("mana_cost"));
-        card.setCmc(rowSet.getString("cmc"));
+        card.setCmc(rowSet.getDouble("cmc"));
         card.setCardType(rowSet.getString("card_type"));
         card.setOracleText(rowSet.getString("oracle_text"));
         card.setColors(rowSet.getString("colors"));
         card.setColorIdentity(rowSet.getString("color_identity"));
         card.setKeywords(rowSet.getString("keywords"));
-        card.setLegal(rowSet.getBoolean("legal"));
         return card;
     }
 }
