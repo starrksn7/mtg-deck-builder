@@ -2,22 +2,22 @@ package com.builder.deckbuilder.model;
 
 public class Deck {
 
-    private int deckId;
+    private int id;
     private String deckName;
 
     public Deck(int deckId, String deckName){
-        this.deckId = deckId;
+        this.id = deckId;
         this.deckName = deckName;
     }
 
     public Deck(){
     }
     public int getDeckId() {
-        return deckId;
+        return id;
     }
 
     public void setDeckId(int deckId) {
-        this.deckId = deckId;
+        this.id = deckId;
     }
 
     public String getDeckName() {
