@@ -1,19 +1,28 @@
 package com.builder.deckbuilder.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
 
     private int id;
     private String email;
     private String userName;
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private boolean active;
+    private Set<Authority> authority = new HashSet<>();
 
-    public User(int id, String email, String userName, String password, boolean active){
+
+    public User(int id, String email, String userName, String password, Set<Authority> authorities){
         this.id = id;
         this.email = email;
         this.userName = userName;
         this.password = password;
-        this.active = active;
+        if(authorities != null){
+            this.setAuthorities(authorities);
+        }
+        this.active = true;
     }
 
     public User(){
@@ -57,5 +66,21 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Set<Authority> getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Set<Authority> authority) {
+        this.authority = authority;
+    }
+
+    public void setAuthorities(String authorities){
+        String[] roles = authorities.split(",");
+        for(String role : roles){
+            String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
+            this.authorities.add(new Authority(authority));
+        }
     }
 }
