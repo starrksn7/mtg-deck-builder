@@ -2,6 +2,9 @@ package com.builder.deckbuilder.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
 
     private int id;
@@ -11,10 +14,10 @@ public class User {
     private String password;
     @JsonIgnore
     private boolean active;
-    private Set<Authority> authority = new HashSet<>();
+    private Set<Authority> authorities = new HashSet<>();
 
 
-    public User(int id, String email, String userName, String password, Set<Authority> authorities){
+    public User(int id, String email, String userName, String password, String authorities){
         this.id = id;
         this.email = email;
         this.userName = userName;
@@ -69,11 +72,11 @@ public class User {
     }
 
     public Set<Authority> getAuthority() {
-        return authority;
+        return authorities;
     }
 
     public void setAuthority(Set<Authority> authority) {
-        this.authority = authority;
+        this.authorities = authority;
     }
 
     public void setAuthorities(String authorities){
