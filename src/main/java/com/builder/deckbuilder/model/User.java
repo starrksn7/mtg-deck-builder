@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Objects;
 
 public class User {
 
@@ -85,5 +86,31 @@ public class User {
             String authority = role.contains("ROLE_") ? role : "ROLE_" + role;
             this.authorities.add(new Authority(authority));
         }
+    }
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                active == user.active &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(authorities, user.authorities);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, email, password, active, authorities);
+    }
+
+    @Override
+    public String toString(){
+        return "User{id + " + id
+                + ", email= " + email
+                + ", userName=  " + userName
+                + ", active= " + active
+                + ", authorities= " + authorities
+                + "}";
     }
 }
