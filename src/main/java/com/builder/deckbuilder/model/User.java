@@ -14,7 +14,7 @@ public class User {
     @JsonIgnore
     private String password;
     @JsonIgnore
-    private boolean active;
+    private boolean activated;
     private Set<Authority> authorities = new HashSet<>();
 
 
@@ -26,7 +26,7 @@ public class User {
         if(authorities != null){
             this.setAuthorities(authorities);
         }
-        this.active = true;
+        this.activated = true;
     }
 
     public User(){
@@ -64,20 +64,20 @@ public class User {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
+    public boolean isActivated() {
+        return activated;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
-    public Set<Authority> getAuthority() {
+    public Set<Authority> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthority(Set<Authority> authority) {
-        this.authorities = authority;
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     public void setAuthorities(String authorities){
@@ -93,7 +93,7 @@ public class User {
         if(o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id &&
-                active == user.active &&
+                activated == user.activated &&
                 Objects.equals(email, user.email) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(authorities, user.authorities);
@@ -101,7 +101,7 @@ public class User {
 
     @Override
     public int hashCode(){
-        return Objects.hash(id, email, password, active, authorities);
+        return Objects.hash(id, email, password, activated, authorities);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class User {
         return "User{id + " + id
                 + ", email= " + email
                 + ", userName=  " + userName
-                + ", active= " + active
+                + ", activated= " + activated
                 + ", authorities= " + authorities
                 + "}";
     }
