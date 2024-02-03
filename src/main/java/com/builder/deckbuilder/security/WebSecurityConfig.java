@@ -1,6 +1,7 @@
 package com.builder.deckbuilder.security;
 
 import com.builder.deckbuilder.security.jwt.JWTConfigurer;
+import com.builder.deckbuilder.security.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
