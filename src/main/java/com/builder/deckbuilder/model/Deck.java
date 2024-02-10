@@ -4,10 +4,12 @@ public class Deck {
 
     private int id;
     private String deckName;
+    private String commander;
 
-    public Deck(int deckId, String deckName){
+    public Deck(int deckId, String deckName, String commander){
         this.id = deckId;
         this.deckName = deckName;
+        this.commander = commander;
     }
 
     public Deck(){
@@ -26,5 +28,13 @@ public class Deck {
 
     public void setDeckName(String deckName) {
         this.deckName = deckName;
+    }
+
+    public String getCommander(){
+        return commander;
+    }
+
+    public void setCommander(String commander){
+        this.commander = commander;
     }
 }

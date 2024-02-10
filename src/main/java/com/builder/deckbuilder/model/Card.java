@@ -1,10 +1,10 @@
 package com.builder.deckbuilder.model;
 
 public class Card {
-
+    private int id;
     private String name;
     private String scryfallURL;
-    private String image;
+    private String imageLink;
     private String manaCost;
     private String type;
     private String oracleText;
@@ -12,10 +12,11 @@ public class Card {
     private String[] colorIdentity;
     private String[] keywords;
 
-    public Card (String name, String scryfallURL, String image, String manaCost, String type, String oracleText, String[] colors, String[] colorIdentity, String[] keywords){
+    public Card (int id, String name, String scryfallURL, String imageLink, String manaCost, String type, String oracleText, String[] colors, String[] colorIdentity, String[] keywords){
+        this.id = id;
         this.name = name;
         this.scryfallURL = scryfallURL;
-        this.image = image;
+        this.imageLink = imageLink;
         this.manaCost = manaCost;
         this.type = type;
         this.oracleText = oracleText;
@@ -27,6 +28,14 @@ public class Card {
     public Card(){
 
     };
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -44,12 +53,12 @@ public class Card {
         this.scryfallURL = scryfallURL;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageLink() {
+        return imageLink;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageLink(String image) {
+        this.imageLink = imageLink;
     }
 
     public String getManaCost() {
