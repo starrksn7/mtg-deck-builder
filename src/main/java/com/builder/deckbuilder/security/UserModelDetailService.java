@@ -1,5 +1,7 @@
 package com.builder.deckbuilder.security;
 
+import com.builder.deckbuilder.dao.UserDao;
+import com.builder.deckbuilder.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import com.builder.deckbuilder.model.User;
 
 public class UserModelDetailsService implements UserDetailsService {
     private final Logger log = LoggerFactory.getLogger(UserModelDetailsService.class);
@@ -24,7 +25,7 @@ public class UserModelDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating user '{}'", login);
         String lowercaseLogin = login.toLowerCase();
-        return createSpringSecurityUser(lowercaseLogin, userDao.findByEmail(lowercaseLogin));
+        return createSpringSecurityUser(lowercaseLogin, userDao.findUserByEmail(lowercaseLogin));
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
