@@ -1,7 +1,10 @@
 package com.builder.deckbuilder.dao;
 
+import com.builder.deckbuilder.model.Authority;
 import com.builder.deckbuilder.model.User;
 import com.builder.deckbuilder.model.UserDTO;
+
+import java.util.Set;
 
 public interface UserDao {
 
@@ -9,6 +12,6 @@ public interface UserDao {
 
     User findUserByEmail(String email);
 
-    boolean create(String email, String password, String role);
+    boolean create(String email, String userName, String password, Set<Authority> authorities);
 
 }
