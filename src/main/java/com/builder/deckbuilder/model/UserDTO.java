@@ -3,6 +3,7 @@ package com.builder.deckbuilder.model;
 public class UserDTO {
     private int userId;
     private String email;
+    private String userName;
 
     public int getUserId() {
         return userId;
@@ -20,10 +21,15 @@ public class UserDTO {
         this.email = email;
     }
 
+    public String getUserName() { return userName;}
+
+    public void setUserName(String userName) { this.userName = userName;}
+
     @Override
     public String toString() {
         return "UpdateUserProfileDTO{" +
                 "email='" + email + '\'' +
+                ", userName='" + userName +
                 '}';
     }
 }

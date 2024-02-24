@@ -1,12 +1,14 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.User;
+import com.builder.deckbuilder.model.UserDTO;
+import com.builder.deckbuilder.model.exceptions.UserNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import java.util.Objects;
-import com.builder.deckbuilder.model.exceptions.UserNotFoundException;
 
 @Component
 public class JdbcUserDao implements UserDao{
@@ -33,6 +35,17 @@ public class JdbcUserDao implements UserDao{
 
         jdbcTemplate.update(insertSql, email, userName, passwordHash);
         return true;
+    }
+
+    @Override
+    public User updateUserProfile(int userId, UserDTO updatedUser) {
+        String sql = "UPDATE users\n" +
+                "SET email = ?,\n" +
+                "username = ?\n" +
+                "WHERE user_id = ?;";
+        jdbcTemplate.update(sql,updatedUser.getEmail(),updatedUser.getUserName(), userId);
+
+        return getUserById(userId);
     }
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
