@@ -29,6 +29,17 @@ public class JdbcUserDao implements UserDao{
         }
     }
 
+    public User getUserById(int id){
+        String sql = "SELECT * FROM users WHERE user_id = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+
+        if(result.next()){
+            return mapRowToUser(result);
+        } else {
+            throw new UserNotFoundException();
+        }
+    }
+
     public boolean create(String email, String userName, String password){
         String insertSql = "INSERT INTO users (email, userName, password) VALUES (?, ?, ?);";
         String passwordHash = new BCryptPasswordEncoder().encode(password);
