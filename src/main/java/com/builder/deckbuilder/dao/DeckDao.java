@@ -19,4 +19,6 @@ public interface DeckDao {
     Boolean updateDeck(int id, String deckName, String commander);
 
     Boolean createDeck(String deckName, String commander);
+
+    List<Deck> searchForDeckByName(String deckName);
 }
