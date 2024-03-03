@@ -15,10 +15,11 @@ public class JdbcDeckDao implements DeckDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Boolean create(String deckName, String commander){
-        String sql = "INSERT INTO decks (deck_name, commander) VALUES (?, ?);";
-        jdbcTemplate.update(sql, deckName, commander);
-
+    public Boolean createDeck(int userId, String deckName, String commander){
+        String deckInsert = "INSERT INTO decks (deck_name, commander) VALUES (?, ?) RETURNING deck_id;";
+        int deckId = jdbcTemplate.update(deckInsert, deckName, commander);
+        String userDeckMap = "INSERT INTO user_decks (user_id, deck_id), VALUES (?, ?);";
+        jdbcTemplate.update(userDeckMap, userId, deckId);
         return true;
     }
 
