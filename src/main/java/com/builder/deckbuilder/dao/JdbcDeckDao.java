@@ -18,7 +18,7 @@ public class JdbcDeckDao implements DeckDao{
     public Boolean createDeck(int userId, String deckName, String commander){
         String deckInsert = "INSERT INTO decks (deck_name, commander) VALUES (?, ?) RETURNING deck_id;";
         int deckId = jdbcTemplate.update(deckInsert, deckName, commander);
-        String userDeckMap = "INSERT INTO user_decks (user_id, deck_id), VALUES (?, ?);";
+        String userDeckMap = "INSERT INTO user_decks (user_id, deck_id) VALUES (?, ?);";
         jdbcTemplate.update(userDeckMap, userId, deckId);
         return true;
     }
@@ -32,6 +32,20 @@ public class JdbcDeckDao implements DeckDao{
             decks.add(mapRowToDeck(results));
         }
 
+        return decks;
+    }
+
+    public List<Deck> findDeckByUser(String username){
+        String sql = "SELECT deck_name, commander FROM decks d " +
+                "JOIN user_decks ud ON ud.deck_id = d.deck_id " +
+                "JOIN users u ON u.user_id = ud.user_id " +
+                "WHERE u.username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        List<Deck> decks = new ArrayList<>();
+
+        while(results.next()){
+            decks.add(mapRowToDeck(results));
+        }
         return decks;
     }
     private Deck mapRowToDeck(SqlRowSet row){

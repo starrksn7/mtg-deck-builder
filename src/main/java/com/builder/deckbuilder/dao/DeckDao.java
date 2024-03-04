@@ -8,8 +8,6 @@ public interface DeckDao {
 
     List<Deck> findDecksByUser(String username);
 
-    Deck getDeckByName(String name);
-
     Deck getDeckById(int id);
 
     Boolean addCardToDeck(Card card);
