@@ -1,6 +1,7 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Deck;
+import com.builder.deckbuilder.model.exceptions.DeckNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
@@ -47,6 +48,17 @@ public class JdbcDeckDao implements DeckDao{
             decks.add(mapRowToDeck(results));
         }
         return decks;
+    }
+
+    public Deck getDeckById(int id){
+        String sql = "SELECT deck_name, commander FROM decks WHERE deck_id = ?";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+
+        if(result.next()){
+            return mapRowToDeck(result);
+        } else {
+            throw new DeckNotFoundException();
+        }
     }
     private Deck mapRowToDeck(SqlRowSet row){
         Deck deck = new Deck();
