@@ -60,6 +60,23 @@ public class JdbcDeckDao implements DeckDao{
             throw new DeckNotFoundException();
         }
     }
+
+    public boolean updateDeck(int id, String deckName, String commander){
+        String sql = "UPDATE decks SET deck_name = ?, commander = ? " +
+                "WHERE deck_id = ?;";
+
+        try {
+            if(jdbcTemplate.update(sql, deckName, commander, id) == 1){
+                return true;
+            } else {
+                System.err.println("This deck could not be updated");
+                return false;
+            }
+        } catch (DeckNotFoundException d) {
+            throw new DeckNotFoundException();
+        }
+    }
+
     private Deck mapRowToDeck(SqlRowSet row){
         Deck deck = new Deck();
         deck.setDeckName(row.getString("deck_name"));

@@ -10,13 +10,13 @@ public interface DeckDao {
 
     Deck getDeckById(int id);
 
-    Boolean addCardToDeck(Card card);
+    boolean addCardToDeck(Card card);
 
-    Boolean removeCardFromDeck(Card card);
+    boolean removeCardFromDeck(Card card);
 
-    Boolean updateDeck(int id, String deckName, String commander);
+    boolean updateDeck(int id, String deckName, String commander);
 
-    Boolean createDeck(int userId, String deckName, String commander);
+    boolean createDeck(int userId, String deckName, String commander);
 
     List<Deck> searchForDeckByName(String deckName);
 }
