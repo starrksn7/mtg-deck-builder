@@ -77,6 +77,11 @@ public class JdbcDeckDao implements DeckDao{
         }
     }
 
+    public boolean removeCardFromDeck(int deckId, int cardId){
+        String sql = "DELETE FROM decks_cards WHERE deck_id = ? AND card_id = ?;";
+        return jdbcTemplate.update(sql, deckId, cardId) == 1;
+    }
+
     private Deck mapRowToDeck(SqlRowSet row){
         Deck deck = new Deck();
         deck.setDeckName(row.getString("deck_name"));

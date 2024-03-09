@@ -1,7 +1,7 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Deck;
-import com.builder.deckbuilder.model.Card;
+
 import java.util.List;
 
 public interface DeckDao {
@@ -10,9 +10,9 @@ public interface DeckDao {
 
     Deck getDeckById(int id);
 
-    boolean addCardToDeck(Card card);
+    boolean addCardToDeck(int deckId, int cardId);
 
-    boolean removeCardFromDeck(Card card);
+    boolean removeCardFromDeck(int deckId, int cardId);
 
     boolean updateDeck(int id, String deckName, String commander);
 
