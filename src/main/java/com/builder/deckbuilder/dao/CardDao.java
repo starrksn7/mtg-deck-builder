@@ -2,11 +2,14 @@ package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 
 public interface CardDao {
-    List<Card> getCardByName(String name);
+    List<Card> getCardByName(String name) throws UnsupportedEncodingException;
+
+    List<Card> getCardsFromUri(String uri);
 
     List<Card> findCardByType(String type);
 
@@ -17,4 +20,5 @@ public interface CardDao {
     List<Card> getCardByColors(String[] colors);
 
     List<Card> getCardByColorIdentity(String[] colorIdentity);
+
 }
