@@ -1,8 +1,8 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
+import org.apache.tomcat.util.json.JSONParser;
 import org.json.simple.JSONObject;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.UnsupportedEncodingException;
@@ -23,5 +23,13 @@ public class JdbcCardDao implements CardDao{
             return getCardsFromUri(uri);
     }
 
+//    private Card mapObjectToCard(JSONObject object){
+//        JSONParser jsonParser = new JSONParser();
+//        JSONObject json = (JSONObject) parser.parse(object);
+//        Card card = new Card();
+//
+//        card.setId(reader.getString("id"));
+//
+//    }
 
 }
