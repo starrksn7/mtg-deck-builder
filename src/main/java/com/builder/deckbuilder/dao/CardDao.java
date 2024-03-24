@@ -2,14 +2,16 @@ package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 
 public interface CardDao {
-    List<Card> getCardByName(String name) throws UnsupportedEncodingException;
+    List<Card> searchForCardByName(String name) throws UnsupportedEncodingException;
 
-    List<Card> getCardsFromUri(String uri);
+    List<Card> getCardsFromUri(String uri) throws IOException;
 
     List<Card> findCardByType(String type);
 

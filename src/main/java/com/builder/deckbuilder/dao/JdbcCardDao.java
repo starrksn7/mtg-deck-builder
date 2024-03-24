@@ -1,12 +1,14 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.simple.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 public class JdbcCardDao implements CardDao{
@@ -16,20 +18,22 @@ public class JdbcCardDao implements CardDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     String scryfallUrl = "https://api.scryfall.com";
-    public List<Card> getCardByName(String name) throws UnsupportedEncodingException {
+    public List<Card> searchForCardByName(String name) throws UnsupportedEncodingException {
             String encodedName = URLEncoder.encode(name, "UTF-8");
             String uri = scryfallUrl + "/cards/search?unique=prints&q=" + encodedName;
 
+        try {
             return getCardsFromUri(uri);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-//    private Card mapObjectToCard(JSONObject object){
-//        JSONParser jsonParser = new JSONParser();
-//        JSONObject json = (JSONObject) parser.parse(object);
-//        Card card = new Card();
-//
-//        card.setId(reader.getString("id"));
-//
-//    }
+    public List<Card> getCardsFromUri(String uri) throws IOException {
+        List<Card> cards = new ArrayList<>();
+        URL url = new URL(uri);
+
+        URLConnection connection = url.openConnection();
+    }
 
 }
