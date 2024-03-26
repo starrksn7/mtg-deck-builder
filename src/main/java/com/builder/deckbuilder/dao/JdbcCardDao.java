@@ -1,6 +1,7 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
+import org.json.simple.JSONArray;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
@@ -33,7 +34,10 @@ public class JdbcCardDao implements CardDao{
         List<Card> cards = new ArrayList<>();
         URL url = new URL(uri);
 
+        JSONArray cardArray = new JSONArray();
         URLConnection connection = url.openConnection();
+
+
     }
 
 }
