@@ -1,11 +1,15 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.json.simple.JSONArray;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -31,13 +35,13 @@ public class JdbcCardDao implements CardDao{
     }
 
     public List<Card> getCardsFromUri(String uri) throws IOException {
-        List<Card> cards = new ArrayList<>();
         URL url = new URL(uri);
-
-        JSONArray cardArray = new JSONArray();
         URLConnection connection = url.openConnection();
 
+        InputStreamReader reader = new InputStreamReader(connection.getInputStream());
+        Type listType = new TypeToken<List<Card>>(){}.getType();
 
+        return new Gson().fromJson(reader, listType);
     }
 
 }

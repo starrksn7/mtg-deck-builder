@@ -1,15 +1,29 @@
 package com.builder.deckbuilder.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Arrays;
+
 public class Card {
+    @SerializedName("id")
     private int id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("scryfall_uri")
     private String scryfallURL;
+    @SerializedName("image_uris")
     private String imageLink;
+    @SerializedName("mana_cost")
     private String manaCost;
+    @SerializedName("type_line")
     private String type;
+    @SerializedName("oracle_text")
     private String oracleText;
+    @SerializedName("colors")
     private String[] colors;
+    @SerializedName("color_identity")
     private String[] colorIdentity;
+    @SerializedName("keywords")
     private String[] keywords;
 
     public Card (int id, String name, String scryfallURL, String imageLink, String manaCost, String type, String oracleText, String[] colors, String[] colorIdentity, String[] keywords){
@@ -106,5 +120,9 @@ public class Card {
 
     public void setKeywords(String[] keywords) {
         this.keywords = keywords;
+    }
+
+    public String toJsonString(){
+        return String.format("{\"id\" : %d, \"name\" : \"%s\", \"scryfall_url\" : \"%s\", \"image_link\" : \"%s\", \"mana_cost\" : \"%s\", \"type\" : \"%s\", \"oracle_text\" : \"%s\", \"colors\" : \"%s\", \"color_identity\" : \"%s\", \"keywords\" : \"%s\"}", this.id, this.name, this.scryfallURL, this.imageLink, this.manaCost, this.type, this.oracleText, Arrays.toString(this.colors), Arrays.toString(this.colorIdentity), Arrays.toString(this.keywords));
     }
 }
