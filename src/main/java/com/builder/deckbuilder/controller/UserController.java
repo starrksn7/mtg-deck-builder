@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/decks")
+@RequestMapping("/user")
 @CrossOrigin
-public class DeckController {
+public class UserController {
 }
