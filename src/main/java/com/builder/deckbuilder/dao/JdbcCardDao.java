@@ -3,8 +3,8 @@ package com.builder.deckbuilder.dao;
 import com.builder.deckbuilder.model.Card;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.json.simple.JSONArray;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,9 +13,9 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcCardDao implements CardDao{
     private final JdbcTemplate jdbcTemplate;
 
