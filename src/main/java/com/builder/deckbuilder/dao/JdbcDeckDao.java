@@ -4,10 +4,11 @@ import com.builder.deckbuilder.model.Deck;
 import com.builder.deckbuilder.model.exceptions.DeckNotFoundException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class JdbcDeckDao implements DeckDao{
 
     private final JdbcTemplate jdbcTemplate;
