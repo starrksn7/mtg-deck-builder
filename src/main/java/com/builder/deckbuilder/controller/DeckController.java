@@ -25,4 +25,9 @@ public class DeckController {
     public boolean createDeck(int userId, String deckName, String commander){
         return deckDao.createDeck(userId, deckName, commander);
     }
+
+    @PostMapping(path="/add")
+    public boolean addCardToDeck(int deckId, int cardId){
+        return deckDao.addCardToDeck(deckId, cardId);
+    }
 }
