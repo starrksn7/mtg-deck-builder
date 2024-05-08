@@ -30,4 +30,9 @@ public class DeckController {
     public boolean addCardToDeck(int deckId, int cardId){
         return deckDao.addCardToDeck(deckId, cardId);
     }
+
+    @PostMapping(path="/update")
+    public boolean updateDeck(int id, String deckName, String commander){
+        return deckDao.updateDeck(id, deckName, commander);
+    }
 }
