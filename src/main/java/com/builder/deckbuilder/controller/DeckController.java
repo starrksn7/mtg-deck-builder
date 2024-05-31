@@ -35,4 +35,9 @@ public class DeckController {
     public boolean updateDeck(int id, String deckName, String commander){
         return deckDao.updateDeck(id, deckName, commander);
     }
+
+    @GetMapping(path="/search")
+    public List<Deck> searchForDeckByName(String name){
+        return deckDao.searchForDeckByName(name);
+    }
 }
