@@ -21,6 +21,11 @@ public class DeckController {
         return deckDao.findDecksByUser(username);
     }
 
+    @GetMapping(path="/get_by_id")
+    public Deck getDeckById(int id){
+        return deckDao.getDeckById(id);
+    }
+
     @PostMapping(path="/create")
     public boolean createDeck(int userId, String deckName, String commander){
         return deckDao.createDeck(userId, deckName, commander);
