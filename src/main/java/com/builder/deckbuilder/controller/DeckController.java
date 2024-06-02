@@ -45,4 +45,9 @@ public class DeckController {
     public List<Deck> searchForDeckByName(String name){
         return deckDao.searchForDeckByName(name);
     }
+
+    @DeleteMapping(path="/remove")
+    public boolean removeCardFromDeck(int deckId, int cardId){
+        return deckDao.removeCardFromDeck(deckId, cardId);
+    }
 }
