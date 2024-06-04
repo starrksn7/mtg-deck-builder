@@ -36,7 +36,7 @@ public class DeckController {
         return deckDao.addCardToDeck(deckId, cardId);
     }
 
-    @PostMapping(path="/update")
+    @PutMapping(path="/update")
     public boolean updateDeck(int id, String deckName, String commander){
         return deckDao.updateDeck(id, deckName, commander);
     }
@@ -50,4 +50,7 @@ public class DeckController {
     public boolean removeCardFromDeck(int deckId, int cardId){
         return deckDao.removeCardFromDeck(deckId, cardId);
     }
+
+
+
 }

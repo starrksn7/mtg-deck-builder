@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -19,8 +20,14 @@ public class CardController {
     private CardController(CardDao cardDao){
         this.cardDao = cardDao;
     }
-    @GetMapping(path="")
+    @GetMapping(path="/search")
     public List<Card> searchForCardByName(String name) throws UnsupportedEncodingException {
         return cardDao.searchForCardByName(name);
     }
+
+    @GetMapping(path="/getFromUri")
+    public List<Card> getCardsFromUri(String uri) throws IOException {
+        return cardDao.getCardsFromUri(uri);
+    }
+
 }
