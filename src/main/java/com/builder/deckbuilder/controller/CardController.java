@@ -30,6 +30,11 @@ public class CardController {
         return cardDao.getCardsFromUri(uri);
     }
 
+    @GetMapping(path="/searchByType")
+    public List<Card> findCardByType(String type){
+        return cardDao.findCardByType(type);
+    }
+
     @GetMapping(path="/searchByCost")
     public List<Card> getCardByManaCost(int manaCost){
         return cardDao.getCardByManaCost(manaCost);
