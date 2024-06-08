@@ -40,4 +40,8 @@ public class CardController {
         return cardDao.getCardByManaCost(manaCost);
     }
 
+    @GetMapping(path="/searchByKeyword")
+    public List<Card> getCardByKeyword(String keyword){
+        return cardDao.getCardByKeyword(keyword);
+    }
 }
