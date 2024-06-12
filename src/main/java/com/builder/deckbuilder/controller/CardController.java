@@ -49,4 +49,9 @@ public class CardController {
     public List<Card> getCardByColors(String[] colors){
         return cardDao.getCardByColors(colors);
     }
+
+    @GetMapping(path="/searchByColorIdentity")
+    public List<Card> getCardByColorIdentity(String[] colorIdentity){
+        return cardDao.getCardByColorIdentity(colorIdentity);
+    }
 }
