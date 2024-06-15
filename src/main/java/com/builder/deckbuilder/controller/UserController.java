@@ -17,8 +17,15 @@ public class UserController {
         return userDao.updateUserProfile(userId, updatedUser);
     }
 
-    @GetMapping(path="/find")
+    @GetMapping(path="/findByEmail")
     public User findUserByEmail(String email){
         return userDao.findUserByEmail(email);
     }
+
+    @GetMapping(path="/findById")
+    public User getUserById(int userId){
+        return userDao.getUserById(userId);
+    }
 }
+
+
