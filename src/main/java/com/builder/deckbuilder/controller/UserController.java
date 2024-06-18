@@ -26,6 +26,11 @@ public class UserController {
     public User getUserById(int userId){
         return userDao.getUserById(userId);
     }
+
+    @PostMapping(path="/create")
+    public boolean create(String email, String username, String password){
+        return userDao.create(email, username, password);
+    }
 }
 
 
