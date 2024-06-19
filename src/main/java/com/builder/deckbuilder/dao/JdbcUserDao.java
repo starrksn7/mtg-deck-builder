@@ -41,11 +41,17 @@ public class JdbcUserDao implements UserDao{
     }
 
     public boolean create(String email, String userName, String password){
+        String checkSql = "SELECT username FROM users WHERE username = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(checkSql);
         String insertSql = "INSERT INTO users (email, userName, password) VALUES (?, ?, ?);";
         String passwordHash = new BCryptPasswordEncoder().encode(password);
 
-        jdbcTemplate.update(insertSql, email, userName, passwordHash);
-        return true;
+        if(result.next()){
+            return false;
+        } else {
+            jdbcTemplate.update(insertSql, email, userName, passwordHash);
+            return true;
+        }
     }
 
     @Override
