@@ -12,14 +12,14 @@ public interface CardDao {
 
     List<Card> getCardsFromUri(String uri) throws IOException;
 
-    List<Card> findCardByType(String type);
-
-    List<Card> getCardByManaCost(int manaCost);
-
-    List<Card> getCardByKeyword(String keyword);
-
-    List<Card> getCardByColors(String[] colors);
-
-    List<Card> getCardByColorIdentity(String[] colorIdentity);
+//    List<Card> findCardByType(String type);
+//
+//    List<Card> getCardByManaCost(int manaCost);
+//
+//    List<Card> getCardByKeyword(String keyword);
+//
+//    List<Card> getCardByColors(String[] colors);
+//
+//    List<Card> getCardByColorIdentity(String[] colorIdentity);
 
 }

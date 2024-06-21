@@ -30,28 +30,28 @@ public class CardController {
         return cardDao.getCardsFromUri(uri);
     }
 
-    @GetMapping(path="/searchByType")
-    public List<Card> findCardByType(String type){
-        return cardDao.findCardByType(type);
-    }
-
-    @GetMapping(path="/searchByCost")
-    public List<Card> getCardByManaCost(int manaCost){
-        return cardDao.getCardByManaCost(manaCost);
-    }
-
-    @GetMapping(path="/searchByKeyword")
-    public List<Card> getCardByKeyword(String keyword){
-        return cardDao.getCardByKeyword(keyword);
-    }
-
-    @GetMapping(path="/searchByColors")
-    public List<Card> getCardByColors(String[] colors){
-        return cardDao.getCardByColors(colors);
-    }
-
-    @GetMapping(path="/searchByColorIdentity")
-    public List<Card> getCardByColorIdentity(String[] colorIdentity){
-        return cardDao.getCardByColorIdentity(colorIdentity);
-    }
+//    @GetMapping(path="/searchByType")
+//    public List<Card> findCardByType(String type){
+//        return cardDao.findCardByType(type);
+//    }
+//
+//    @GetMapping(path="/searchByCost")
+//    public List<Card> getCardByManaCost(int manaCost){
+//        return cardDao.getCardByManaCost(manaCost);
+//    }
+//
+//    @GetMapping(path="/searchByKeyword")
+//    public List<Card> getCardByKeyword(String keyword){
+//        return cardDao.getCardByKeyword(keyword);
+//    }
+//
+//    @GetMapping(path="/searchByColors")
+//    public List<Card> getCardByColors(String[] colors){
+//        return cardDao.getCardByColors(colors);
+//    }
+//
+//    @GetMapping(path="/searchByColorIdentity")
+//    public List<Card> getCardByColorIdentity(String[] colorIdentity){
+//        return cardDao.getCardByColorIdentity(colorIdentity);
+//    }
 }
