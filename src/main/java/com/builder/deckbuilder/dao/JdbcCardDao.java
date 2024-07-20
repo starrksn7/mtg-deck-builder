@@ -24,9 +24,11 @@ public class JdbcCardDao implements CardDao{
     }
     String scryfallUrl = "https://api.scryfall.com";
     public List<Card> searchForCardByName(String name) throws UnsupportedEncodingException {
+            System.out.println(1);
+            System.out.println(name);
             String encodedName = URLEncoder.encode(name, "UTF-8");
             String uri = scryfallUrl + "/cards/search?unique=prints&q=" + encodedName;
-
+        System.out.println(2);
         try {
             return getCardsFromUri(uri);
         } catch (IOException e) {
@@ -35,12 +37,13 @@ public class JdbcCardDao implements CardDao{
     }
 
     public List<Card> getCardsFromUri(String uri) throws IOException {
+        System.out.println(3);
         URL url = new URL(uri);
         URLConnection connection = url.openConnection();
-
+        System.out.println(4);
         InputStreamReader reader = new InputStreamReader(connection.getInputStream());
         Type listType = new TypeToken<List<Card>>(){}.getType();
-
+        System.out.println(5);
         return new Gson().fromJson(reader, listType);
     }
 
