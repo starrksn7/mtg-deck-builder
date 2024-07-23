@@ -10,7 +10,7 @@ import java.util.List;
 public interface CardDao {
     List<Card> searchForCardByName(String name) throws UnsupportedEncodingException;
 
-    List<Card> getCardsFromUri(String uri) throws IOException;
+    String getCardsFromUri(String uri) throws IOException;
 
 //    List<Card> findCardByType(String type);
 //

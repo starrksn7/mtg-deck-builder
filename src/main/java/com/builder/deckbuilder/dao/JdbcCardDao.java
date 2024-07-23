@@ -1,6 +1,9 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -25,13 +28,29 @@ public class JdbcCardDao implements CardDao{
             String encodedName = URLEncoder.encode(name, "UTF-8");
             String uri = scryfallUrl + "/cards/search?unique=prints&q=" + encodedName;
         try {
-            return getCardsFromUri(uri);
+            String searchResults = getCardsFromUri(uri);
+
+            JsonObject jsonObject = new JsonParser().parse(searchResults).getAsJsonObject();
+            JsonArray jsonCards = (JsonArray) jsonObject.get("data");
+
+            ArrayList<String> responseCards = new ArrayList<>();
+            ArrayList<Card> result = new ArrayList<>();
+
+            for(int i = 0; i < jsonCards.size(); i+=1){
+                JsonObject tempObj = (JsonObject) jsonCards.get(i);
+                responseCards.add(tempObj.get("name").getAsString());
+            }
+
+            System.out.println(String.valueOf(responseCards));
+
+            return result;
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Card> getCardsFromUri(String uri) throws IOException {
+    public String getCardsFromUri(String uri) throws IOException {
         List<Card> list = new ArrayList<>();
 
         URL expansionsListUrl = new URL(uri);
@@ -51,9 +70,7 @@ public class JdbcCardDao implements CardDao{
             body.append(scanner.nextLine());
         }
         scanner.close();
-//        return String.valueOf(body);
-        System.out.println(String.valueOf(body));
-        return list;
+        return String.valueOf(body);
     }
 
 }

@@ -26,7 +26,7 @@ public class CardController {
     }
 
     @GetMapping(path="/getFromUri")
-    public List<Card> getCardsFromUri(String uri) throws IOException {
+    public String getCardsFromUri(String uri) throws IOException {
         return cardDao.getCardsFromUri(uri);
     }
 
