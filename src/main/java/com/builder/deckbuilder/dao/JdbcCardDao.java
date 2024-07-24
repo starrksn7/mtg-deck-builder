@@ -73,4 +73,16 @@ public class JdbcCardDao implements CardDao{
         return String.valueOf(body);
     }
 
+    public Card mapResultToCard(JsonObject result){
+        Card card = new Card();
+        card.setName(result.get("name").getAsString());
+        card.setScryfallURL(result.get("scryfall_uri").getAsString());
+        card.setImageLink(result.get("image_uris").getAsString());
+        card.setManaCost(result.get("mana_cost").getAsString());
+        card.setType(result.get("type").getAsString());
+        card.setOracleText(result.get("oracle_text").getAsString());
+
+        return card;
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.builder.deckbuilder.dao;
 
 import com.builder.deckbuilder.model.Card;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -11,6 +12,8 @@ public interface CardDao {
     List<Card> searchForCardByName(String name) throws UnsupportedEncodingException;
 
     String getCardsFromUri(String uri) throws IOException;
+
+    Card mapResultToCard(JsonObject result);
 
 //    List<Card> findCardByType(String type);
 //
