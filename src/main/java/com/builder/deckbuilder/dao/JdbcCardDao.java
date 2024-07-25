@@ -81,6 +81,12 @@ public class JdbcCardDao implements CardDao{
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
+        String colors = result.get("colors").getAsString();
+        card.setColors(colors.split(","));
+        String colorIdentity = result.get("color_identity").getAsString();
+        card.setColorIdentity(colorIdentity.split(","));
+        String keywords = result.get("keywords").getAsString();
+        card.setColorIdentity(keywords.split(","));
 
         return card;
     }
