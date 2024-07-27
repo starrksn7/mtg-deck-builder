@@ -38,10 +38,13 @@ public class JdbcCardDao implements CardDao{
 
             for(int i = 0; i < jsonCards.size(); i+=1){
                 JsonObject tempObj = (JsonObject) jsonCards.get(i);
-                responseCards.add(tempObj.get("name").getAsString());
+                result.add(mapResultToCard(tempObj));
+//                responseCards.add(tempObj.get("name").getAsString());
             }
 
-            System.out.println(String.valueOf(responseCards));
+//            for(JsonObject item : responseCards)
+
+            System.out.println(String.valueOf(result));
 
             return result;
 
@@ -77,7 +80,11 @@ public class JdbcCardDao implements CardDao{
         Card card = new Card();
         card.setName(result.get("name").getAsString());
         card.setScryfallURL(result.get("scryfall_uri").getAsString());
-        card.setImageLink(result.get("image_uris").getAsString());
+//        JsonElement imageUris = result.get("image_uris");
+//        JsonObject uris = imageUris.getAsJsonObject();
+//        Map<String, String> map = new HashMap<>();
+        JsonArray uris = (JsonArray) result.get("image_uris");
+        card.setImageLink(uris.get(Integer.parseInt("normal")).getAsString());
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
