@@ -80,14 +80,13 @@ public class JdbcCardDao implements CardDao{
         Card card = new Card();
         card.setName(result.get("name").getAsString());
         card.setScryfallURL(result.get("scryfall_uri").getAsString());
-//        JsonElement imageUris = result.get("image_uris");
-//        JsonObject uris = imageUris.getAsJsonObject();
-//        Map<String, String> map = new HashMap<>();
-        JsonArray uris = (JsonArray) result.get("image_uris");
-        card.setImageLink(uris.get(Integer.parseInt("normal")).getAsString());
+        JsonObject uris = (JsonObject) result.get("image_uris");
+        card.setImageLink(uris.get("normal").getAsString());
         card.setManaCost(result.get("mana_cost").getAsString());
-        card.setType(result.get("type").getAsString());
+        card.setType(result.get("type_line").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
+        // colors is causing an illegal state exception error that I need to figure out.  Other
+        // variables might have the same issue as colors is an array in the scryfall response
         String colors = result.get("colors").getAsString();
         card.setColors(colors.split(","));
         String colorIdentity = result.get("color_identity").getAsString();
