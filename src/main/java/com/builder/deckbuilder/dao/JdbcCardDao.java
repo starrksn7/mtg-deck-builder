@@ -78,6 +78,7 @@ public class JdbcCardDao implements CardDao{
 
     public Card mapResultToCard(JsonObject result){
         Card card = new Card();
+        System.out.println(result);
         card.setName(result.get("name").getAsString());
         card.setScryfallURL(result.get("scryfall_uri").getAsString());
         JsonObject uris = (JsonObject) result.get("image_uris");
@@ -85,10 +86,14 @@ public class JdbcCardDao implements CardDao{
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type_line").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
-        // colors is causing an illegal state exception error that I need to figure out.  Other
-        // variables might have the same issue as colors is an array in the scryfall response
-        String colors = result.get("colors").getAsString();
-        card.setColors(colors.split(","));
+
+        JsonArray colors = (JsonArray) result.get("colors");
+        String[] colorsArray = new String[colors.size()];
+        for(int i = 0; i < colors.size(); i++){
+            colorsArray[i] = colors.get(i).getAsString();
+        }
+        // Need to sort out the remaining assignments below, which
+        // are causing the same error as the assignment to colors was
         String colorIdentity = result.get("color_identity").getAsString();
         card.setColorIdentity(colorIdentity.split(","));
         String keywords = result.get("keywords").getAsString();
