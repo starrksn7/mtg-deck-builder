@@ -92,10 +92,14 @@ public class JdbcCardDao implements CardDao{
         for(int i = 0; i < colors.size(); i++){
             colorsArray[i] = colors.get(i).getAsString();
         }
+
+        JsonArray colorIdentity = (JsonArray) result.get("color_identity");
+        String[] identityArray = new String[colorIdentity.size()];
+        for (int i = 0; i < colorIdentity.size(); i++){
+            identityArray[i] = colorIdentity.get(i).getAsString();
+        }
         // Need to sort out the remaining assignments below, which
         // are causing the same error as the assignment to colors was
-        String colorIdentity = result.get("color_identity").getAsString();
-        card.setColorIdentity(colorIdentity.split(","));
         String keywords = result.get("keywords").getAsString();
         card.setColorIdentity(keywords.split(","));
 
