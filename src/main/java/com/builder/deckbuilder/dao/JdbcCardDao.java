@@ -44,7 +44,7 @@ public class JdbcCardDao implements CardDao{
 
 //            for(JsonObject item : responseCards)
 
-            System.out.println(String.valueOf(result));
+            System.out.println(result);
 
             return result;
 
@@ -86,7 +86,7 @@ public class JdbcCardDao implements CardDao{
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type_line").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
-
+        //Need to figure out why these next three variables are coming back null
         JsonArray colors = (JsonArray) result.get("colors");
         String[] colorsArray = new String[colors.size()];
         for(int i = 0; i < colors.size(); i++){
@@ -98,10 +98,12 @@ public class JdbcCardDao implements CardDao{
         for (int i = 0; i < colorIdentity.size(); i++){
             identityArray[i] = colorIdentity.get(i).getAsString();
         }
-        // Need to sort out the remaining assignments below, which
-        // are causing the same error as the assignment to colors was
-        String keywords = result.get("keywords").getAsString();
-        card.setColorIdentity(keywords.split(","));
+
+        JsonArray keywords = (JsonArray) result.get("keywords");
+        String[] keywordsArray = new String[keywords.size()];
+        for (int i = 0; i < keywords.size(); i++){
+            keywordsArray[i] = keywords.get(i).getAsString();
+        }
 
         return card;
     }
