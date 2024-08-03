@@ -78,32 +78,35 @@ public class JdbcCardDao implements CardDao{
 
     public Card mapResultToCard(JsonObject result){
         Card card = new Card();
-        System.out.println(result);
         card.setName(result.get("name").getAsString());
         card.setScryfallURL(result.get("scryfall_uri").getAsString());
+        //Need to figure out why image link is getting set to null
         JsonObject uris = (JsonObject) result.get("image_uris");
         card.setImageLink(uris.get("normal").getAsString());
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type_line").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
-        //Need to figure out why these next three variables are coming back null
+
         JsonArray colors = (JsonArray) result.get("colors");
         String[] colorsArray = new String[colors.size()];
         for(int i = 0; i < colors.size(); i++){
             colorsArray[i] = colors.get(i).getAsString();
         }
+        card.setColors(colorsArray);
 
         JsonArray colorIdentity = (JsonArray) result.get("color_identity");
         String[] identityArray = new String[colorIdentity.size()];
         for (int i = 0; i < colorIdentity.size(); i++){
             identityArray[i] = colorIdentity.get(i).getAsString();
         }
+        card.setColorIdentity(identityArray);
 
         JsonArray keywords = (JsonArray) result.get("keywords");
         String[] keywordsArray = new String[keywords.size()];
         for (int i = 0; i < keywords.size(); i++){
             keywordsArray[i] = keywords.get(i).getAsString();
         }
+        card.setKeywords(keywordsArray);
 
         return card;
     }
