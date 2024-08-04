@@ -39,12 +39,7 @@ public class JdbcCardDao implements CardDao{
             for(int i = 0; i < jsonCards.size(); i+=1){
                 JsonObject tempObj = (JsonObject) jsonCards.get(i);
                 result.add(mapResultToCard(tempObj));
-//                responseCards.add(tempObj.get("name").getAsString());
             }
-
-//            for(JsonObject item : responseCards)
-
-            System.out.println(result);
 
             return result;
 
@@ -82,7 +77,12 @@ public class JdbcCardDao implements CardDao{
         card.setScryfallURL(result.get("scryfall_uri").getAsString());
         //Need to figure out why image link is getting set to null
         JsonObject uris = (JsonObject) result.get("image_uris");
-        card.setImageLink(uris.get("normal").getAsString());
+//        System.out.println(uris.toString());
+
+        System.out.println(uris.get("small").getAsString());
+
+        card.setImageLink(uris.get("small").getAsString());
+        System.out.println(card.getImageLink());
         card.setManaCost(result.get("mana_cost").getAsString());
         card.setType(result.get("type_line").getAsString());
         card.setOracleText(result.get("oracle_text").getAsString());
