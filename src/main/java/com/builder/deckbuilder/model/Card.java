@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class Card {
     @SerializedName("id")
     private int id;
+    private String scryfallId;
     @SerializedName("name")
     private String name;
     @SerializedName("scryfall_uri")
@@ -26,8 +27,8 @@ public class Card {
     @SerializedName("keywords")
     private String[] keywords;
 
-    public Card (int id, String name, String scryfallURL, String imageLink, String manaCost, String type, String oracleText, String[] colors, String[] colorIdentity, String[] keywords){
-        this.id = id;
+    public Card (String scryfallId, String name, String scryfallURL, String imageLink, String manaCost, String type, String oracleText, String[] colors, String[] colorIdentity, String[] keywords){
+        this.scryfallId = scryfallId;
         this.name = name;
         this.scryfallURL = scryfallURL;
         this.imageLink = imageLink;
@@ -48,6 +49,14 @@ public class Card {
 
     public void setId(int id){
         this.id = id;
+    }
+
+    public String getScryfallId(){
+        return scryfallId;
+    }
+
+    public void setScryfallId(String scryfallId){
+        this.scryfallId = scryfallId;
     }
 
     public String getName() {
