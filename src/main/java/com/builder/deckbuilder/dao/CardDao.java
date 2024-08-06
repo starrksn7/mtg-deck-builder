@@ -15,7 +15,7 @@ public interface CardDao {
 
     Card mapResultToCard(JsonObject result);
 
-//    List<Card> findCardByType(String type);
+    List<Card> findCardByType(String type);
 //
 //    List<Card> getCardByManaCost(int manaCost);
 //

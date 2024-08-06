@@ -71,6 +71,15 @@ public class JdbcCardDao implements CardDao{
         return String.valueOf(body);
     }
 
+    public List<Card> findCardByType(String type){
+        List<Card> list = new ArrayList<>();
+
+        //Need to sort out this function.  May just involve appending the correct
+        //string to the base url
+        return list;
+
+    }
+
     public Card mapResultToCard(JsonObject result){
         String scryfallId = result.get("id").getAsString();
         String name = result.get("name").getAsString();
