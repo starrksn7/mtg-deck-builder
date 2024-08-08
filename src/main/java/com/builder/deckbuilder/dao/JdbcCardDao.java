@@ -33,7 +33,6 @@ public class JdbcCardDao implements CardDao{
             JsonObject jsonObject = new JsonParser().parse(searchResults).getAsJsonObject();
             JsonArray jsonCards = (JsonArray) jsonObject.get("data");
 
-            ArrayList<String> responseCards = new ArrayList<>();
             ArrayList<Card> result = new ArrayList<>();
 
             for(int i = 0; i < jsonCards.size(); i+=1){
@@ -73,11 +72,9 @@ public class JdbcCardDao implements CardDao{
 
     public List<Card> findCardByType(String type){
         List<Card> list = new ArrayList<>();
+        String uri = scryfallUrl + "/cards/search?q=t%3A" + type ;
 
-        //Need to sort out this function.  May just involve appending the correct
-        //string to the base url
         return list;
-
     }
 
     public Card mapResultToCard(JsonObject result){
